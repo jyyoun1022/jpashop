@@ -3,6 +3,7 @@ package jpabook.jpashop;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -47,5 +48,11 @@ public class MockingTests {
         mockList.get(0);
         verify(mockList,times(2)).get(0);
         verify(mockList, atLeast(2)).get(0);
+
+
+        ArgumentCaptor<String> arg = ArgumentCaptor.forClass(String.class);
+        verify(mockList).add(arg.capture());
+        assertEquals("apple",arg.getValue());
     }
+
 }
